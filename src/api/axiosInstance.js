@@ -21,12 +21,12 @@ api.interceptors.request.use(
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        const error = error.response ? error.response.status : null;
-        if (error === 401) {
+        const errorMsg = error.response ? error.response.status : null;
+        if (errorMsg === 401) {
             localStorage.removeItem("token");
             localStorage.removeItem("user");
             window.location.href = "/login";
-        }else if (error === 403){
+        }else if (errorMsg === 403){
             window.location.href("/access-denied");
         }
 
