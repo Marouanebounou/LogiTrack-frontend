@@ -14,8 +14,8 @@ export const ClientList = () => {
     const [clients , setClients] = useState([])
     const [page , setPage] = useState(0)
     const [rowPerPage , setRowPerPage] = useState(10)
-    const [totalEelemnts, setTotalElements] = useState(0)
-    const [searchTerm , setSearchterm] = useState('')
+    const [totalElements, setTotalElements] = useState(0)
+    const [searchTerm , setSearchTerm] = useState('')
 
     const fetchClients = async () => {
         try {
@@ -23,13 +23,13 @@ export const ClientList = () => {
                 params: {
                     page: page,
                     size: rowPerPage,
-                    nom: searchTerm || undefined,
+                    nom: searchTerm.trim() || undefined,
                     sort: 'nom',
                     order: 'asc'
                 }
             })
             setClients(response.data.content || response.data)
-            setTotalElements(response.data.totalEelemnts || response.data.length)
+            setTotalElements(response.data.totalElements || response.data.length)
             
         } catch (error) {
             console.error('Erreur lors du chargement des clients:', error)    
@@ -120,12 +120,12 @@ export const ClientList = () => {
             </Table>
             <TablePagination
             component="div"
-            count={totalEelemnts}
+            count={totalElements}
             page={page}
             onPageChange={(e, newPage) => setPage(newPage)}
             rowsPerPage={rowPerPage}
             onRowsPerPageChange={(e) => {
-                setRowsPerPage(parseInt(e.target.value, 10));
+                setRowPerPage(parseInt(e.target.value, 10));
                 setPage(0);
             }}
             />

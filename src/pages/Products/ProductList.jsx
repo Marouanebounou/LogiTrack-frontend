@@ -26,7 +26,7 @@ export const ProductList = () => {
         params: {
           page: page,
           size: rowsPerPage,
-          category: category || undefined,
+          category: category.trim() || null,
           sort: 'name',
         },
       });

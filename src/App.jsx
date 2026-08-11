@@ -25,8 +25,10 @@ function App() {
               <Route path="/dashboard" element={<DashboardPage />}/>
               <Route path="/clients" element={<ClientList />}/>
               <Route path="/clients/new" element={<ClientForm />}/>
+              <Route path="/clients/edit/:id" element={<ClientForm />}/>
               <Route path="/products" element={<ProductList />}/>
               <Route path="/products/new" element={<ProductForm />}/>
+              <Route path="/products/edit/:id" element={<ProductForm />}/>
               <Route path="/orders" element={<OrderList />}/>
               <Route path="/orders/new" element={<OrderForm />}/>
               <Route path="/users" element={<UserList />}/>
