@@ -2,10 +2,11 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../context/AuthContext"
 import api from "../../api/axiosInstance"
-import { Box, Typography, Button, Paper, TextField, Table, TableHead, TableRow, TableCell, TableBody, Tooltip, IconButton, TablePagination } from "@mui/material"
+import { Box, Typography, Button, Paper, TextField, Table, TableHead, TableRow, TableCell, TableBody, Tooltip, IconButton, TablePagination, TableSortLabel } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import EditIcon from "@mui/icons-material/Edit"
 import DeleteIcon from "@mui/icons-material/Delete"
+import VisibilityIcon from "@mui/icons-material/Visibility"
 
 
 export const ClientList = () => {
@@ -16,6 +17,7 @@ export const ClientList = () => {
     const [rowPerPage , setRowPerPage] = useState(10)
     const [totalElements, setTotalElements] = useState(0)
     const [searchTerm , setSearchTerm] = useState('')
+    const [sortDir, setSortDir] = useState('asc')
 
     const fetchClients = async () => {
         try {
@@ -24,8 +26,7 @@ export const ClientList = () => {
                     page: page,
                     size: rowPerPage,
                     nom: searchTerm.trim() || undefined,
-                    sort: 'nom',
-                    order: 'asc'
+                    sort: `nom,${sortDir}`,
                 }
             })
             setClients(response.data.content || response.data)
@@ -38,7 +39,7 @@ export const ClientList = () => {
 
     useEffect(() => {
         fetchClients()
-    }, [page, rowPerPage , searchTerm])
+    }, [page, rowPerPage , searchTerm, sortDir])
     
     const handleDelete = async (id) => {
         if (window.confirm("Voulez-vous vraiment supprimer ce client ?")) {
@@ -83,13 +84,19 @@ export const ClientList = () => {
             <TableHead>
                 <TableRow>
                 <TableCell>ID</TableCell>
-                <TableCell>Nom</TableCell>
+                <TableCell>
+                  <TableSortLabel
+                    active
+                    direction={sortDir}
+                    onClick={() => { setSortDir(sortDir === 'asc' ? 'desc' : 'asc'); setPage(0); }}
+                  >
+                    Nom
+                  </TableSortLabel>
+                </TableCell>
                 <TableCell>Prénom</TableCell>
                 <TableCell>Email</TableCell>
                 <TableCell>Téléphone</TableCell>
-                {['ADMIN', 'MANAGER'].includes(user?.role) && (
-                    <TableCell align="center">Actions</TableCell>
-                )}
+                <TableCell align="center">Actions</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -101,6 +108,11 @@ export const ClientList = () => {
                     <TableCell>{client?.email}</TableCell>
                     <TableCell>{client?.number}</TableCell>
                     <TableCell align="center">
+                    <Tooltip title="Voir les détails">
+                      <IconButton onClick={() => navigate(`/clients/${client.id}`)}>
+                        <VisibilityIcon color="action" />
+                      </IconButton>
+                    </Tooltip>
                     {['ADMIN', 'MANAGER'].includes(user?.role) && (
                         <Tooltip title="Modifier">
                         <IconButton onClick={() => navigate(`/clients/edit/${client.id}`)}>
