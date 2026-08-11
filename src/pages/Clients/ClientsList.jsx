@@ -87,7 +87,9 @@ export const ClientList = () => {
                 <TableCell>Prénom</TableCell>
                 <TableCell>Email</TableCell>
                 <TableCell>Téléphone</TableCell>
-                <TableCell align="center">Actions</TableCell>
+                {['ADMIN', 'MANAGER'].includes(user?.role) && (
+                    <TableCell align="center">Actions</TableCell>
+                )}
                 </TableRow>
             </TableHead>
             <TableBody>

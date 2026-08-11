@@ -23,7 +23,6 @@ export const AuthProvider = ({children}) => {
 
     const  login = async (userEmail , password) => {
         const response = await api.post("/auth/login", {email: userEmail , password});
-        console.log(response.data);
         const {token : jwt , nom: nom , prenom : prenom , email : email , id : id , role: role} = response.data;
         const userData = {nom, prenom, email, id, role};
 

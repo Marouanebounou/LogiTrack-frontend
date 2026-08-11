@@ -83,7 +83,9 @@ export const ProductList = () => {
               <TableCell>Catégorie</TableCell>
               <TableCell>Prix (DH)</TableCell>
               <TableCell>Stock</TableCell>
-              <TableCell align="center">Actions</TableCell>
+              {['ADMIN','MANAGER'].includes(user?.role) && (
+                <TableCell align="center">Actions</TableCell>
+              )}
             </TableRow>
           </TableHead>
           <TableBody>
