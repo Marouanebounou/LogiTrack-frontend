@@ -7,10 +7,16 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 export const UserList = () => {
+  const {user} = useAuth()
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
+
+  if(["MANAGER" , "AGENT"].includes(user?.role)){
+    window.location.href = "/access-denied"
+  }
 
   const fetchUsers = async () => {
     try {

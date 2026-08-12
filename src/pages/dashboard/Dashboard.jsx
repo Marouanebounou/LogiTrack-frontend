@@ -22,6 +22,10 @@ export const DashboardPage = () => {
   const [recentOrders, setRecentOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  if (user?.role == "AGENT") {
+    window.location.href = "/clients"
+  }
+
   useEffect(() => {
     const fetchAll = async () => {
       try {

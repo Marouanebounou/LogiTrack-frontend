@@ -158,7 +158,7 @@ export const OrderList = () => {
                       <VisibilityIcon color="action" />
                     </IconButton>
                   </Tooltip>
-                  {['ADMIN', 'MANAGER'].includes(user?.role) && (
+                  {['ADMIN'].includes(user?.role) && (
                     <Tooltip title="Supprimer">
                       <IconButton onClick={() => handleDelete(order.id)}>
                         <DeleteIcon color="error" />

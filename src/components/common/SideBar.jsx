@@ -26,7 +26,7 @@ export const SideBar = () => {
       text: "Tableau de bord",
       path: "/dashboard",
       icon: <DashboardIcon />,
-      roles: ["ADMIN", "MANAGER", "AGENT"],
+      roles: ["ADMIN", "MANAGER"],
     },
     {
       text: "Clients",

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const api = axios.create({
     baseURL: 'http://localhost:8080/api',
@@ -27,7 +28,7 @@ api.interceptors.response.use(
             localStorage.removeItem("user");
             window.location.href = "/login";
         }else if (errorMsg === 403){
-            window.location.href("/access-denied");
+            window.location.href = "/access-denied";
         }
 
         return Promise.reject(error)

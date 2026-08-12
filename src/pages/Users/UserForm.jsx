@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import api from '../../api/axiosInstance';
 import { Container, Paper, Typography, TextField, Button, Box, Grid, MenuItem } from '@mui/material';
+import { useAuth } from '../../context/AuthContext';
 
 const schema = yup.object({
   nom: yup.string().required('Le prénom est obligatoire'),
@@ -15,7 +16,12 @@ const schema = yup.object({
 });
 
 export const UserForm = () => {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const {user} = useAuth()
+    
+    if(["MANAGER" , "AGENT"].includes(user?.role)){
+      window.location.href = "/access-denied"
+    }
 
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
     resolver: yupResolver(schema),

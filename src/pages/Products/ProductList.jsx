@@ -112,16 +112,18 @@ export const ProductList = () => {
           slotProps={{ htmlInput: { min: 0 } }}
           onChange={(e) => { setMaxPrice(e.target.value); setPage(0); }}
         />
-        <FormControlLabel
-          control={
-            <Switch
-              checked={lowStockOnly}
-              onChange={(e) => { setLowStockOnly(e.target.checked); setPage(0); }}
-              color="warning"
-            />
-          }
-          label="Stock faible (≤10)"
-        />
+        {["ADMIN","MANAGER"].includes(user?.role) && (
+          <FormControlLabel
+            control={
+              <Switch
+                checked={lowStockOnly}
+                onChange={(e) => { setLowStockOnly(e.target.checked); setPage(0); }}
+                color="warning"
+              />
+            }
+            label="Stock faible (≤10)"
+          />
+        )}
       </Paper>
 
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
