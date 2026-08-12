@@ -11,7 +11,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
-import { DashboardCard } from "../../components/dashboard/DashboardCard";
+import { DashboardCard } from "../../components/Dashboard/DashboardCard"
 
 const STATUS_COLOR = { LIVREE: "success", EXPEDIEE: "info", EN_ATTENTE: "warning" };
 
@@ -59,7 +59,6 @@ export const DashboardPage = () => {
         Bienvenue, {user?.nom} ({user?.role})
       </Typography>
 
-      {/* Stats cards */}
       <Grid container spacing={3} sx={{ mb: 4 }}>
         <Grid item xs={12} sm={6} md={3}>
           <DashboardCard title="Total Clients" value={stats?.totalClients || 0} icon={<PeopleIcon />} color="info.main" />
@@ -84,7 +83,6 @@ export const DashboardPage = () => {
         </Grid>
       </Grid>
 
-      {/* Bottom tables */}
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <Paper sx={{ p: 2 }}>
